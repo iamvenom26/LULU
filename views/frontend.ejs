@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Development Academy | LULU Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <%- include('./css/frontend') %>
+    <style>
+        :root {
+    --primary-color: #4834d4;    /* Purple shade for frontend theme */
+    --secondary-color: #686de0;   /* Light purple */
+    --accent-color: #00b894;      /* Mint green */
+    --background-color: #f7f7f7;  /* Light background */
+    --card-bg: #ffffff;           /* White cards */
+    --text-color: #2d3436;        /* Dark text */
+    --text-secondary: #636e72;    /* Grey text */
+    --success-color: #00b894;     /* Green */
+    --warning-color: #fdcb6e;     /* Yellow */
+    --error-color: #ff7675;       /* Red */
+    --border-radius: 10px;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    box-shadow: var(--box-shadow);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.back-home {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.back-home:hover {
+    color: var(--primary-color);
+}
+
+.enroll-btn {
+    padding: 0.5rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.enroll-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(72, 52, 212, 0.3);
+}
+
+/* Hero Section */
+.hero {
+    padding: 8rem 2rem 4rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+/* Hero Stats */
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-item i {
+    font-size: 2rem;
+    opacity: 0.9;
+}
+
+.stat-info {
+    text-align: left;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Advertisement Banner */
+.ad-banner {
+    background: linear-gradient(45deg, #00b894, #00cec9);
+    padding: 1.5rem 0;
+    color: white;
+}
+
+.ad-content {
+    text-align: center;
+}
+
+.ad-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.countdown {
+    color: var(--warning-color);
+    font-weight: bold;
+}
+
+/* Course Categories */
+.course-categories {
+    padding: 1rem 0;
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.category-btn {
+    background: none;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-secondary);
+    padding: 0.5rem 1.5rem;
+    margin: 0 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.category-btn.active,
+.category-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* Courses Section */
+.courses {
+    padding: 3rem 0;
+}
+
+.courses h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.course-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.course-image {
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.course-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-content {
+    padding: 1.2rem;
+}
+
+.course-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;  /* Add standard property */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 2.8em;
+}
+
+.instructor {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.rating-score {
+    color: #f1c40f;
+    font-weight: bold;
+}
+
+.stars {
+    color: #f1c40f;
+}
+
+.rating-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.meta-info {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.price-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.current-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.original-price {
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    font-size: 0.9rem;
+}
+
+.bestseller-tag,
+.hot-tag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.bestseller-tag {
+    background: var(--warning-color);
+    color: #000000;
+}
+
+.hot-tag {
+    background: var(--error-color);
+    color: white;
+}
+
+/* Featured Topics */
+.featured-topics {
+    padding: 3rem 0;
+    background: white;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.topic-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.topic-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Footer */
+.footer {
+    background: white;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .course-grid,
+    .topics-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .course-grid,
+    .topics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .course-grid,
+    .topics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .category-btn {
+        margin: 0.25rem;
+    }
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="/" class="back-home">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <div class="logo">LULU Academy</div>
+            </div>
+            <% if (locals.user) { %>
+                <div class="nav-right">
+                    <a href="#" class="enroll-btn">Enroll Now</a>
+                </div>
+            <% } else { %>
+                <div class="nav-left">
+                    <a href="/user/signin" class="enroll-btn">Login</a>
+                </div>
+                <% } %>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Trending in 2024</div>
+            <h1>Master Frontend Development</h1>
+            <p class="hero-subtitle">Create stunning user interfaces with modern web technologies</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">150K+</span>
+                        <span class="stat-label">Active Students</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">4.9</span>
+                        <span class="stat-label">Course Rating</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-certificate"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Job Assistance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Advertisement Banner -->
+    <div class="ad-banner">
+        <div class="container">
+            <div class="ad-content">
+                <span class="ad-badge">Limited Time Offer</span>
+                <h3>Get 75% Off on All Frontend Courses</h3>
+                <p>Offer ends in: <span class="countdown">2d 15h 30m</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Categories -->
+    <div class="course-categories">
+        <div class="container">
+            <button class="category-btn active">All</button>
+            <button class="category-btn">Beginner</button>
+            <button class="category-btn">Intermediate</button>
+            <button class="category-btn">Advanced</button>
+        </div>
+    </div>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2>Trending Frontend Courses</h2>
+            <div class="course-grid">
+                <!-- React Course -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0033.jpg" alt="React Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Complete React Developer in 2024: Zero to Expert</h3>
+                        <p class="instructor">Sarah Anderson</p>
+                        <div class="rating">
+                            <span class="rating-score">4.9</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(18,521)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>38 hours</span> • <span>450 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹449</span>
+                            <span class="original-price">₹3,999</span>
+                        </div>
+                        <span class="bestseller-tag">Bestseller</span>
+                    </div>
+                </div>
+    
+                <!-- Next.js Course -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0037.jpg" alt="Next.js Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Next.js 14 & React - The Complete Guide 2024</h3>
+                        <p class="instructor">Michael Brown</p>
+                        <div class="rating">
+                            <span class="rating-score">4.8</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(12,129)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>32 hours</span> • <span>380 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹499</span>
+                            <span class="original-price">₹3,999</span>
+                        </div>
+                        <span class="hot-tag">Hot & New</span>
+                    </div>
+                </div>
+    
+                <!-- Vue.js Course -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0026.jpg" alt="Vue.js Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Vue.js 3 Masterclass with Composition API</h3>
+                        <p class="instructor">Emma Davis</p>
+                        <div class="rating">
+                            <span class="rating-score">4.7</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(8,331)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>28 hours</span> • <span>340 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹549</span>
+                            <span class="original-price">₹4,999</span>
+                        </div>
+                        <span class="bestseller-tag">Bestseller</span>
+                    </div>
+                </div>
+    
+                <!-- Angular Course -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0030.jpg" alt="Angular Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Angular 17 - The Complete Guide with TypeScript</h3>
+                        <p class="instructor">David Wilson</p>
+                        <div class="rating">
+                            <span class="rating-score">4.8</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(9,892)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>36 hours</span> • <span>420 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹399</span>
+                            <span class="original-price">₹3,499</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- JavaScript Advanced -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0034.jpg" alt="JavaScript Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Advanced JavaScript: From Zero to Expert 2024</h3>
+                        <p class="instructor">Alex Turner</p>
+                        <div class="rating">
+                            <span class="rating-score">4.9</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(15,234)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>40 hours</span> • <span>480 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹649</span>
+                            <span class="original-price">₹4,999</span>
+                        </div>
+                        <span class="bestseller-tag">Bestseller</span>
+                    </div>
+                </div>
+    
+                <!-- Tailwind CSS -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0035.jpg" alt="Tailwind Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Tailwind CSS: From Fundamentals to Advanced</h3>
+                        <p class="instructor">Lisa Chen</p>
+                        <div class="rating">
+                            <span class="rating-score">4.7</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(6,421)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>22 hours</span> • <span>280 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹399</span>
+                            <span class="original-price">₹2,999</span>
+                        </div>
+                        <span class="hot-tag">Hot & New</span>
+                    </div>
+                </div>
+    
+                <!-- TypeScript -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0029.jpg" alt="TypeScript Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">TypeScript Complete Developer Guide 2024</h3>
+                        <p class="instructor">James Wilson</p>
+                        <div class="rating">
+                            <span class="rating-score">4.8</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(7,129)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>26 hours</span> • <span>320 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹449</span>
+                            <span class="original-price">₹3,499</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Three.js -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0027.jpg" alt="Three.js Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Three.js: 3D Web Development Masterclass</h3>
+                        <p class="instructor">Robert Clark</p>
+                        <div class="rating">
+                            <span class="rating-score">4.9</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(4,876)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>30 hours</span> • <span>350 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹599</span>
+                            <span class="original-price">₹4,999</span>
+                        </div>
+                        <span class="hot-tag">Hot & New</span>
+                    </div>
+                </div>
+    
+                <!-- CSS Advanced -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0031.jpg" alt="Advanced CSS Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Advanced CSS and Sass: Modern CSS for 2024</h3>
+                        <p class="instructor">Sophie Martin</p>
+                        <div class="rating">
+                            <span class="rating-score">4.8</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(9,234)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>28 hours</span> • <span>320 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹449</span>
+                            <span class="original-price">₹3,999</span>
+                        </div>
+                        <span class="bestseller-tag">Bestseller</span>
+                    </div>
+                </div>
+    
+                <!-- React Native -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0032.jpg" alt="React Native Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">React Native: Mobile App Development Guide</h3>
+                        <p class="instructor">Daniel Lee</p>
+                        <div class="rating">
+                            <span class="rating-score">4.7</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(5,891)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>34 hours</span> • <span>390 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹549</span>
+                            <span class="original-price">₹4,499</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Web Animation -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0028.jpg" alt="Web Animation Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Creative Web Animations with GSAP</h3>
+                        <p class="instructor">Maria Garcia</p>
+                        <div class="rating">
+                            <span class="rating-score">4.8</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(3,234)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>24 hours</span> • <span>280 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹399</span>
+                            <span class="original-price">₹2,999</span>
+                        </div>
+                        <span class="hot-tag">Hot & New</span>
+                    </div>
+                </div>
+    
+                <!-- Redux Toolkit -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0036.jpg" alt="Redux Course">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Redux Toolkit & RTK Query Masterclass</h3>
+                        <p class="instructor">Chris Anderson</p>
+                        <div class="rating">
+                            <span class="rating-score">4.9</span>
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(4,567)</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>20 hours</span> • <span>240 lectures</span>
+                        </div>
+                        <div class="price-info">
+                            <span class="current-price">₹449</span>
+                            <span class="original-price">₹3,499</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 LULU Academy. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy policy</a>
+                    <a href="#">Cookie settings</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

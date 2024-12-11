@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup - LULU</title>
+    <%- include('./css/login-style') %>
+</head>
+<body>
+    <!-- Add this near the top of the container -->
+<a href="/" class="back-btn">Back to Home</a>
+    <div class="container">
+        <!-- Login Section -->
+        <div class="form-container login-container">
+            <form action="/user/signin" method="post">
+                <h2 class="form-title">Login</h2>
+                <input type="email" placeholder="Email Address" name="email" required />
+                <input type="password" placeholder="Password" name="password" required />
+                <button type="submit">Login</button>
+                <p class="switch-text">Don't have an account? <span class="switch-btn" data-switch="signup">Sign Up</span></p>
+            </form>
+        </div>
+
+        <!-- Signup Section -->
+        <div class="form-container signup-container">
+            <form action="/user/signup" method="POST">
+                <h2 class="form-title">Sign Up</h2>
+                <input type="text" placeholder="Full Name" name="FullName" required />
+                <input type="email" placeholder="Email Address" name="email" required />
+                <input type="password" placeholder="Password" name="password" required />
+                <button type="submit">Sign Up</button>
+                <p class="switch-text">Already have an account? <span class="switch-btn" data-switch="login">Login</span></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".container");
+    const switchBtns = document.querySelectorAll(".switch-btn");
+
+    switchBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const switchTo = btn.dataset.switch;
+            if (switchTo === "signup") {
+                container.classList.add("signing-up");
+            } else {
+                container.classList.remove("signing-up");
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>

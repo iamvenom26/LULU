@@ -1,0 +1,141 @@
+<style>
+/* General Body Styling */
+body {
+margin: 0;
+font-family: 'Arial', sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background: linear-gradient(135deg, #1a1f40, #162c56);
+color: white;
+overflow: hidden;
+}
+
+/* Container for Forms */
+.container {
+position: relative;
+width: 800px;
+height: 500px;
+background: #0f1a2e;
+border-radius: 15px;
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+overflow: hidden;
+display: flex;
+}
+
+/* Form Containers */
+.form-container {
+position: absolute;
+width: 50%;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 20px;
+box-sizing: border-box;
+transition: all 0.6s ease-in-out;
+}
+
+.login-container {
+left: 0;
+background: #162c56;
+}
+
+.signup-container {
+right: 0;
+background: #1a1f40;
+opacity: 0;
+transform: translateX(100%);
+}
+
+/* Form Elements */
+form {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+}
+
+.form-title {
+font-size: 2rem;
+margin-bottom: 20px;
+color: #ffffff;
+text-transform: uppercase;
+}
+
+input {
+width: 80%;
+padding: 10px;
+margin: 10px 0;
+border: none;
+border-radius: 5px;
+background: #243a5e;
+color: white;
+font-size: 1rem;
+}
+
+input::placeholder {
+color: #b3c2e3;
+}
+
+button {
+width: 80%;
+padding: 10px;
+border: none;
+border-radius: 5px;
+background: #4976d6;
+color: white;
+font-size: 1.1rem;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+button:hover {
+background: #355ecf;
+}
+/* Add these styles */
+.back-btn {
+position: absolute;
+top: 20px;
+left: 20px;
+color: white;
+text-decoration: none;
+font-size: 0.9rem;
+transition: 0.3s;
+}
+
+.back-btn:hover {
+color: #4976d6;
+}
+/* Text for Switching */
+.switch-text {
+font-size: 0.9rem;
+margin-top: 15px;
+}
+
+.switch-btn {
+color: #63a0ff;
+cursor: pointer;
+font-weight: bold;
+transition: all 0.3s ease;
+}
+
+.switch-btn:hover {
+color: #4976d6;
+text-decoration: underline;
+}
+
+/* Transition for Form Switching */
+.container.signing-up .login-container {
+transform: translateX(-100%);
+opacity: 0;
+}
+
+.container.signing-up .signup-container {
+transform: translateX(0);
+opacity: 1;
+}
+</style>

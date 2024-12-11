@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LULU - Professional Learning Platform</title>
+    
+    <%- include('./css/style') %>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="user-profile">
+            <% if (locals.user) { %>
+                <img 
+                    src="<%= user.profileImage %>" 
+                    alt="User Profile" 
+                    onerror="this.onerror=null; this.src='/images/default.png';"
+                    id="profileImage"
+                    class="profile-image"
+                    style="cursor: pointer;"
+                >
+                <h3><%= user.FullName || 'User' %></h3>
+            <% } else { %>
+                <img src="/images/default2.png" alt="Default Profile">
+                <h3>Welcome Guest</h3>
+            <% } %>
+        </div>
+        <div class="sidebar-menu">
+            <% if (locals.user) { %>
+                <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-book"></i> My Courses</a>
+                <a href="#"><i class="fas fa-history"></i> History</a>
+                <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+                <a href="#"><i class="fas fa-certificate"></i> Certificates</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <a href="/user/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <% } %>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="nav-left">
+                <div id="profileToggle" class="profile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="logo">LULU</div>
+            </div>
+            <div class="nav-center">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="What do you want to learn today?">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="/aboutUs" class="teach-link">About Us</a>
+                <% if (locals.user) { %>
+                <% }else { %>
+                    <form action="/user/signin" method="get"  >
+                <button class="login-btn">Login</button> 
+            </form>
+                <% } %>
+            </div>
+        </header>
+        <!-- Hero Section -->
+   <!-- Hero Section -->
+<section class="hero">
+    <div class="hero-left">
+        <h1>Transform Your Career with Expert-Led Courses</h1>
+        <p>Join over 50,000 learners mastering in-demand tech skills</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Students</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Courses</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4.8</span>
+                <span class="stat-label">Rating</span>
+            </div>
+        </div>
+        <button class="explore-btn">Start Learning</button>
+    </div>
+    <div class="hero-right">
+        <img src="/images/main.png" alt="Learning Illustration">
+    </div>
+</section>
+
+        <!-- Categories Section -->
+        <!-- Categories Section -->
+<section class="categories-section">
+    <div class="section-header">
+        <h2>Explore Top Categories</h2>
+        <p>Choose from our most popular learning paths</p>
+    </div>
+    <div class="categories-grid">
+        <form action="/user/frontend" method="get">
+            <button type="submit" style="all: unset; cursor: pointer; display: block; width: 100%;">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Frontend Development</h3>
+                    <p>Master modern web development</p>
+                </div>
+            </button>
+        </form>        
+        <div class="category-card">
+            <form action="/user/backend" method="get">
+                <button type="submit" style="all: unset; cursor: pointer; display: block; width: 100%;">
+            <div class="category-icon">
+                <i class="fas fa-database"></i>
+            </div>
+            <h3>Backend Development</h3>
+            <p>Build robust server systems</p>
+        </div>
+    </button>
+</form>
+
+
+        <div class="category-card">
+            <form action="/user/server" method="get">
+                <button type="submit" style="all: unset; cursor: pointer; display: block; width: 100%;">
+            <div class="category-icon">
+                <i class="fas fa-server"></i>
+            </div>
+            <h3>Server Management</h3>
+            <p>Deploy with confidence</p>
+        </div>
+    </button>
+</form>
+    </div>
+</section>
+<section class="contact-section">
+    <div class="section-header">
+        <h2>Get in Touch</h2>
+        <p>We'd love to hear from you</p>
+    </div>
+    <div class="contact-container">
+        <div class="contact-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Location</h3>
+                <p>Amravati, Maharashtra, India</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>contact@lulu.com</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-phone"></i>
+                <h3>Phone</h3>
+                <p>+91 97 6323 6258</p>
+            </div>
+        </div>
+        <form class="contact-form" action="/report/user"   method="post">
+            <div class="form-group">
+                <input type="text" placeholder="Your Name" name="FullName" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Your Email" name="email" required>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Your Message" name="content" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>About LULU</h3>
+            <p>Professional learning platform dedicated to empowering learners worldwide.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <a href="/aboutUs">About Us</a>
+            <a href="#">Courses</a>
+            <a href="#">Contact</a>
+            <a href="#">Terms</a>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 LULU Academy. All rights reserved.</p>
+    </div>
+</footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+   
+<!-- Profile Photo Upload Modal -->
+<div id="profilePhotoModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Update Profile Photo</h2>
+        <form id="profilePhotoForm" enctype="multipart/form-data">
+            <input type="file" name="profilePhoto" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</div>
+
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const profileToggle = document.getElementById('profileToggle');
+    
+ 
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(overlay);
+
+   
+    profileToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    });
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+   
+    const sidebarMenu = document.querySelector('.sidebar-menu');
+    sidebarMenu.addEventListener('click', function(event) {
+        if (event.target.tagName === 'A') {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    });
+});
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const profileImage = document.getElementById('profileImage');
+        const modal = document.getElementById('profilePhotoModal');
+        const closeBtn = document.querySelector('.close');
+        const form = document.getElementById('profilePhotoForm');
+
+        if (profileImage) {
+            profileImage.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+        }
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                try {
+                    const response = await fetch('/user/upload-profile-photo', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                     
+                        profileImage.src = data.imageUrl;
+                        modal.style.display = 'none';
+                        form.reset();
+                    } else {
+                        alert(data.error || 'Failed to upload photo');
+                    }
+                } catch (error) {
+                    console.error('Upload error:', error);
+                    alert('Failed to upload photo');
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

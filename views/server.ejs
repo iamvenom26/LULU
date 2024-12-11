@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Development Academy | LULU Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <%- include('./css/Server') %>
+  
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="/" class="back-home">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <div class="logo">LULU Academy</div>
+            </div>
+            <div class="nav-right">
+                <% if (locals.user) { %>
+                    <div class="nav-right">
+                        <a href="#" class="enroll-btn">Enroll Now</a>
+                    </div>
+                <% } else { %>
+                    <div class="nav-left">
+                        <a href="/user/signin" class="enroll-btn">Login</a>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Server Development 2024</div>
+            <h1>Master Server-Side Technologies</h1>
+            <p class="hero-subtitle">Build robust backend systems and server architectures</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <i class="fas fa-server"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">100K+</span>
+                        <span class="stat-label">Active Students</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">4.8</span>
+                        <span class="stat-label">Course Rating</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-certificate"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Job Assistance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Advertisement Banner -->
+    <div class="ad-banner">
+        <div class="container">
+            <div class="ad-content">
+                <span class="ad-badge">Limited Time Offer</span>
+                <h3>Get 75% Off on All Server Development Courses</h3>
+                <p>Offer ends in: <span class="countdown">2d 15h 30m</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Categories -->
+    <div class="course-categories">
+        <div class="container">
+            <button class="category-btn active">All</button>
+            <button class="category-btn">Database</button>
+            <button class="category-btn">Web Servers</button>
+            <button class="category-btn">APIs</button>
+        </div>
+    </div>
+        <!-- Courses Section -->
+        <section id="courses" class="courses">
+            <div class="container">
+                <h2>Trending Server Development Courses</h2>
+                <div class="course-grid">
+                    <!-- MySQL Course -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="images/mysql.jpg" alt="MySQL Course">
+                        </div>
+                        <div class="course-content">
+                            <h3 class="course-title">Complete MySQL Database Administration</h3>
+                            <p class="instructor">John Smith</p>
+                            <div class="rating">
+                                <span class="rating-score">4.9</span>
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(15,521)</span>
+                            </div>
+                            <div class="meta-info">
+                                <span>35 hours</span> • <span>420 lectures</span>
+                            </div>
+                            <div class="price-info">
+                                <span class="current-price">₹399</span>
+                                <span class="original-price">₹2,699</span>
+                            </div>
+                            <span class="bestseller-tag">Bestseller</span>
+                        </div>
+                    </div>
+    
+                    <!-- MongoDB Course -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="images/mongodb.jpg" alt="MongoDB Course">
+                        </div>
+                        <div class="course-content">
+                            <h3 class="course-title">MongoDB: From Basics to Advanced 2024</h3>
+                            <p class="instructor">Sarah Johnson</p>
+                            <div class="rating">
+                                <span class="rating-score">4.8</span>
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(12,129)</span>
+                            </div>
+                            <div class="meta-info">
+                                <span>32 hours</span> • <span>380 lectures</span>
+                            </div>
+                            <div class="price-info">
+                                <span class="current-price">₹449</span>
+                                <span class="original-price">₹3,999</span>
+                            </div>
+                            <span class="hot-tag">Hot & New</span>
+                        </div>
+                    </div>
+    
+                    <!-- PostgreSQL Course -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="images/postgresql.jpg" alt="PostgreSQL Course">
+                        </div>
+                        <div class="course-content">
+                            <h3 class="course-title">PostgreSQL Advanced Database Design</h3>
+                            <p class="instructor">Michael Chen</p>
+                            <div class="rating">
+                                <span class="rating-score">4.7</span>
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(8,331)</span>
+                            </div>
+                            <div class="meta-info">
+                                <span>28 hours</span> • <span>340 lectures</span>
+                            </div>
+                            <div class="price-info">
+                                <span class="current-price">₹499</span>
+                                <span class="original-price">₹3,999</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Apache Web Server -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="images/apache.jpg" alt="Apache Course">
+                        </div>
+                        <div class="course-content">
+                            <h3 class="course-title">Apache Web Server Configuration & Security</h3>
+                            <p class="instructor">David Wilson</p>
+                            <div class="rating">
+                                <span class="rating-score">4.8</span>
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(6,892)</span>
+                            </div>
+                            <div class="meta-info">
+                                <span>25 hours</span> • <span>300 lectures</span>
+                            </div>
+                            <div class="price-info">
+                                <span class="current-price">₹399</span>
+                                <span class="original-price">₹2,999</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Nginx Course -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="images/nginx.jpg" alt="Nginx Course">
+                        </div>
+                        <div class="course-content">
+                            <h3 class="course-title">Nginx Web Server Mastery</h3>
+                            <p class="instructor">Alex Turner</p>
+                            <div class="rating">
+                                <span class="rating-score">4.9</span>
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(7,234)</span>
+                            </div>
+                            <div class="meta-info">
+                                <span>22 hours</span> • <span>280 lectures</span>
+                            </div>
+                            <div class="price-info">
+                                <span class="current-price">₹449</span>
+                                <span class="original-price">₹3,499</span>
+                            </div>
+                            <span class="bestseller-tag">Bestseller</span>
+                        </div>
+                    </div>
+    
+                    <!-- API Development -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="images/api.jpg" alt="API Course">
+                        </div>
+                        <div class="course-content">
+                            <h3 class="course-title">RESTful API Design & Development</h3>
+                            <p class="instructor">Lisa Chen</p>
+                            <div class="rating">
+                                <span class="rating-score">4.7</span>
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(9,421)</span>
+                            </div>
+                            <div class="meta-info">
+                                <span>30 hours</span> • <span>350 lectures</span>
+                            </div>
+                            <div class="price-info">
+                                <span class="current-price">₹549</span>
+                                <span class="original-price">₹3,999</span>
+                            </div>
+                            <span class="hot-tag">Hot & New</span>
+                        </div>
+                    </div>
+    
+                    <!-- Docker -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="images/docker.jpg" alt="Docker Course">
+                        </div>
+                        <div class="course-content">
+                            <h3 class="course-title">Docker & Container Management</h3>
+                            <p class="instructor">James Wilson</p>
+                            <div class="rating">
+                                <span class="rating-score">4.8</span>
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(11,129)</span>
+                            </div>
+                            <div class="meta-info">
+                                <span>28 hours</span> • <span>320 lectures</span>
+                            </div>
+                            <div class="price-info">
+                                <span class="current-price">₹599</span>
+                                <span class="original-price">₹4,499</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Server Security -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="images/security.jpg" alt="Security Course">
+                        </div>
+                        <div class="course-content">
+                            <h3 class="course-title">Server Security & Protection</h3>
+                            <p class="instructor">Robert Clark</p>
+                            <div class="rating">
+                                <span class="rating-score">4.9</span>
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-count">(5,876)</span>
+                            </div>
+                            <div class="meta-info">
+                                <span>26 hours</span> • <span>310 lectures</span>
+                            </div>
+                            <div class="price-info">
+                                <span class="current-price">₹499</span>
+                                <span class="original-price">₹3,999</span>
+                            </div>
+                            <span class="hot-tag">Hot & New</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; 2024 LULU Academy. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Terms</a>
+                        <a href="#">Privacy policy</a>
+                        <a href="#">Cookie settings</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    
+       
+    </body>
+    </html>

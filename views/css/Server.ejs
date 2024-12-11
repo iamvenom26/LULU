@@ -1,0 +1,375 @@
+<style>
+:root {
+--primary-color: #2c3e50;    /* Dark blue for server theme */
+--secondary-color: #34495e;   /* Lighter blue */
+--accent-color: #27ae60;      /* Green */
+--background-color: #f7f7f7;  /* Light background */
+--card-bg: #ffffff;           /* White cards */
+--text-color: #2d3436;        /* Dark text */
+--text-secondary: #636e72;    /* Grey text */
+--success-color: #27ae60;     /* Green */
+--warning-color: #f1c40f;     /* Yellow */
+--error-color: #e74c3c;       /* Red */
+--border-radius: 10px;
+--box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+--transition: all 0.3s ease;
+}
+
+/* Global Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Poppins', sans-serif;
+line-height: 1.6;
+background: var(--background-color);
+color: var(--text-color);
+}
+
+.container {
+max-width: 1400px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+z-index: 1000;
+padding: 1rem 0;
+box-shadow: var(--box-shadow);
+}
+
+.nav-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 2rem;
+}
+
+.nav-left {
+display: flex;
+align-items: center;
+gap: 2rem;
+}
+
+.logo {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+text-decoration: none;
+}
+
+.back-home {
+display: flex;
+align-items: center;
+gap: 8px;
+color: var(--text-color);
+text-decoration: none;
+font-weight: 500;
+transition: var(--transition);
+}
+
+.back-home:hover {
+color: var(--primary-color);
+}
+
+.enroll-btn {
+padding: 0.5rem 1.5rem;
+background: var(--primary-color);
+color: white;
+border-radius: 25px;
+text-decoration: none;
+transition: var(--transition);
+font-weight: 500;
+}
+
+.enroll-btn:hover {
+background: var(--secondary-color);
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+}
+
+/* Hero Section */
+.hero {
+padding: 8rem 2rem 4rem;
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+color: white;
+text-align: center;
+}
+
+.hero-content {
+max-width: 800px;
+margin: 0 auto;
+}
+
+.hero-badge {
+display: inline-block;
+background: rgba(255, 255, 255, 0.2);
+padding: 0.5rem 1rem;
+border-radius: 20px;
+margin-bottom: 1rem;
+font-weight: 500;
+}
+
+.hero h1 {
+font-size: 3.5rem;
+margin-bottom: 1rem;
+line-height: 1.2;
+}
+
+.hero-subtitle {
+font-size: 1.2rem;
+opacity: 0.9;
+margin-bottom: 2rem;
+}
+
+/* Hero Stats */
+.hero-stats {
+display: flex;
+justify-content: center;
+gap: 3rem;
+margin-top: 3rem;
+}
+
+.stat-item {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.stat-item i {
+font-size: 2rem;
+opacity: 0.9;
+}
+
+.stat-info {
+text-align: left;
+}
+
+.stat-number {
+font-size: 1.5rem;
+font-weight: 700;
+}
+
+.stat-label {
+font-size: 0.9rem;
+opacity: 0.9;
+}
+
+/* Course Cards */
+.course-card {
+background: var(--card-bg);
+border-radius: var(--border-radius);
+overflow: hidden;
+transition: var(--transition);
+box-shadow: var(--box-shadow);
+}
+
+.course-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.course-image {
+position: relative;
+aspect-ratio: 16/9;
+}
+
+.course-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.course-content {
+padding: 1.2rem;
+}
+
+.course-title {
+font-size: 1rem;
+font-weight: 600;
+margin-bottom: 0.5rem;
+color: var(--text-color);
+display: -webkit-box;
+-webkit-line-clamp: 2;
+line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+height: 2.8em;
+}
+
+.instructor {
+color: var(--text-secondary);
+font-size: 0.9rem;
+margin-bottom: 0.5rem;
+}
+
+/* Course Grid */
+.course-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 1.5rem;
+padding: 2rem 0;
+}
+
+/* Tags and Badges */
+.bestseller-tag,
+.hot-tag {
+display: inline-block;
+padding: 0.2rem 0.5rem;
+border-radius: 4px;
+font-size: 0.8rem;
+font-weight: 600;
+margin-top: 0.5rem;
+}
+
+.bestseller-tag {
+background: var(--warning-color);
+color: #000000;
+}
+
+.hot-tag {
+background: var(--error-color);
+color: white;
+}
+
+/* Footer */
+.footer {
+background: white;
+padding: 2rem 0;
+border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.footer-links {
+display: flex;
+gap: 2rem;
+}
+
+.footer-links a {
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+}
+
+.footer-links a:hover {
+color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+.course-grid {
+grid-template-columns: repeat(3, 1fr);
+}
+}
+
+@media (max-width: 992px) {
+.course-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.hero h1 {
+font-size: 2.5rem;
+}
+
+.hero-stats {
+flex-direction: column;
+gap: 1.5rem;
+}
+}
+
+@media (max-width: 768px) {
+.nav-container {
+padding: 0 1rem;
+}
+
+.footer-content {
+flex-direction: column;
+gap: 1rem;
+text-align: center;
+}
+
+.footer-links {
+flex-wrap: wrap;
+justify-content: center;
+}
+}
+
+@media (max-width: 576px) {
+.course-grid {
+grid-template-columns: 1fr;
+}
+
+.hero h1 {
+font-size: 2rem;
+}
+
+.category-btn {
+margin: 0.25rem;
+}
+}
+
+/* Advertisement Banner */
+.ad-banner {
+background: linear-gradient(45deg, var(--accent-color), var(--success-color));
+padding: 1.5rem 0;
+color: white;
+}
+
+.ad-content {
+text-align: center;
+}
+
+.ad-badge {
+background: rgba(255, 255, 255, 0.2);
+padding: 0.3rem 0.8rem;
+border-radius: 15px;
+font-size: 0.9rem;
+margin-bottom: 0.5rem;
+display: inline-block;
+}
+
+.countdown {
+color: var(--warning-color);
+font-weight: bold;
+}
+
+/* Course Categories */
+.course-categories {
+padding: 1rem 0;
+background: white;
+border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.category-btn {
+background: none;
+border: 1px solid var(--text-secondary);
+color: var(--text-secondary);
+padding: 0.5rem 1.5rem;
+margin: 0 0.5rem;
+border-radius: 20px;
+cursor: pointer;
+transition: var(--transition);
+}
+
+.category-btn.active,
+.category-btn:hover {
+background: var(--primary-color);
+border-color: var(--primary-color);
+color: white;
+}
+</style>
