@@ -8,7 +8,7 @@ exports.handleSignIn = async (req, res) => {
   const { email, password } = req.body;
   try {
     const token = await User.matchPasswordAndGenerateToken(email, password);
-    console.log('token', token);
+    
     res.cookie('token', token).redirect('/');
   } catch (error) {
     res.render('login', { error: 'Incorrect Email or Password' });
