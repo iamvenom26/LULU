@@ -481,10 +481,10 @@ body {
                 </a>
                 <div class="logo">LULU Academy</div>
             </div>
-            <% if (locals.user) { %>
+            <% if (locals.user && locals.user.role) { %>
                 <% if (locals.user.role === "ADMIN") { %>
                     <div class="nav-left">
-                        <a href="/" class="enroll-btn">ADD Course</a>
+                        <a href="/videos/upload" class="enroll-btn">ADD Course</a>
                     </div>
                 <% } else { %>
                     <div class="nav-right">
@@ -496,6 +496,7 @@ body {
                     <a href="/user/signin" class="enroll-btn">Login</a>
                 </div>
             <% } %>
+            
             
         </div>
     </nav>
@@ -558,34 +559,50 @@ body {
         <div class="container">
             <h2>Trending Frontend Courses</h2>
             <div class="course-grid">
-                <!-- React Course -->
-                <div class="course-card">
-                    <div class="course-image">
-                        <img src="C:\Users\user\lulu\home\Views\assets\IMG-20241123-WA0033.jpg" alt="React Course">
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title">Complete React Developer in 2024: Zero to Expert</h3>
-                        <p class="instructor">Sarah Anderson</p>
-                        <div class="rating">
-                            <span class="rating-score">4.9</span>
-                            <span class="stars">★★★★★</span>
-                            <span class="rating-count">(18,521)</span>
-                        </div>
-                        <div class="meta-info">
-                            <span>38 hours</span> • <span>450 lectures</span>
-                        </div>
-                        <div class="price-info">
-                            <span class="current-price">₹449</span>
-                            <span class="original-price">₹3,999</span>
-                        </div>
-                        <span class="bestseller-tag">Bestseller</span>
-                    </div>
-                </div>
+                
+                <!-- Dynamic Courses from Database -->
+                <% if (courses && courses.length > 0) { %>
+                    <% courses.filter(course => course.category === "Frontend").forEach(course => { %>
+                        <form action="/videos/<%= course._id %>" method="get">
+                            <button type="submit" style="all: unset; cursor: pointer; display: block; width: 100%;">
+                                <div class="course-card">
+                                    <div class="course-image">
+                                        <img src="<%= course.coverProfile %>" alt="<%= course.title %>">
+                                    </div>
+                                    <div class="course-content">
+                                        <h3 class="course-title"><%= course.title %></h3>
+                                        <p class="instructor"><%= course.authorName %></p>
+                
+                                        <div class="rating">
+                                            <span class="rating-score">4.9</span>
+                                            <span class="stars">★★★★★</span>
+                                            <span class="rating-count">(18,521)</span>
+                                        </div>
+                                        <div class="meta-info">
+                                            <span>38 hours</span> • <span>450 lectures</span>
+                                        </div>
+                                        <div class="price-info">
+                                            <span class="current-price">₹<%= course.price %></span>
+                                            <span class="original-price">₹3,999</span>
+                                        </div>
+                                        <span class="bestseller-tag">Bestseller</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    <% }); %>
+                <% } else { %>
+                    <p>No courses available</p>
+                <% } %>
+                
     
-               
+                <!-- Static React Course -->
+                
+    
             </div>
         </div>
     </section>
+        
 
     <!-- Simple Footer -->
     <footer class="footer">

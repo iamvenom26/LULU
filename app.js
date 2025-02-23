@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/user');
 const reportRoutes = require('./routes/report');
+const videoRoutes = require("./routes/videoRoutes");
 const { checkForAthenticationCookie } = require('./middleware/authetication');
 const fs = require('fs');
 
@@ -34,6 +35,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(checkForAthenticationCookie('token'));
+app.use("/videos", videoRoutes); // Register video routes
+app.use((req, res, next) => {
+  res.locals.user = req.user || null; // Ensure `user` is available in all views
+  next();
+});
 
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));

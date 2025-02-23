@@ -1,5 +1,5 @@
 const User = require('../model/user');
-
+const Course = require("../model/courses");
 exports.renderSignInPage = (req, res) => {
   res.render('login');
 };
@@ -29,16 +29,36 @@ exports.handleLogout = (req, res) => {
   res.clearCookie('token').redirect('/');
 };
 
-exports.renderFrontendPage = (req, res) => {
-  res.render('frontend', { user: req.user });
+
+exports.renderFrontendPage = async (req, res) => {
+  try {
+      const courses = await Course.find().populate("videos"); // Fetch courses with videos
+      res.render("frontend", { courses }); // Pass courses to EJS template
+  } catch (error) {
+      console.error("Error fetching courses:", error);
+      res.status(500).send("Internal Server Error");
+  }
 };
 
-exports.renderBackendPage = (req, res) => {
-  res.render('backend', { user: req.user });
+
+exports.renderBackendPage = async(req, res) => {
+  try {
+    const courses = await Course.find().populate("videos"); // Fetch courses with videos
+    res.render("backend", { courses }); // Pass courses to EJS template
+} catch (error) {
+    console.error("Error fetching courses:", error);
+    res.status(500).send("Internal Server Error");
+}
 };
 
-exports.renderServerPage = (req, res) => {
-  res.render('server', { user: req.user });
+exports.renderServerPage = async(req, res) => {
+  try {
+    const courses = await Course.find().populate("videos"); // Fetch courses with videos
+    res.render("server", { courses }); // Pass courses to EJS template
+} catch (error) {
+    console.error("Error fetching courses:", error);
+    res.status(500).send("Internal Server Error");
+}
 };
 
 exports.renderAddVideo = (req, res) => {

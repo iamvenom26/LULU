@@ -3,298 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Module</title>
+    <title><%= course.title %></title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-    /* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #1a1f40; /* Dark Grey Background */
-    color: #ffffff; /* White Text */
-    line-height: 1.6;
-}
-
-/* Course Module */
-.course-module {
-    width: 100%;
-    margin: 0 auto;
-    background-color: #243a5e; /* Dark Blue Grey Background */
-}
-
-/* Course Header Section */
-.course-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px;
-    background: linear-gradient(135deg, #4976d6, #355ecf); /* Blue Gradient */
-    height: 350px; /* Increased height */
-}
-
-.header-content {
-    max-width: 60%;
-    text-align: left; /* Align text to the left */
-}
-
-.header-content h1 {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.header-content p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.rating {
-    display: flex;
-    gap: 15px;
-    font-size: 16px;
-}
-
-.rating span {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-}
-
-.rating span:first-child {
-    background-color: #28a745; /* Green for Bestseller */
-}
-
-.header-image img {
-    max-width: 300px;
-    border-radius: 10px;
-}
-
-/* Price & Enroll Section */
-.course-price {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background-color: #0f1a2e; /* Dark Navy Blue */
-}
-
-.price h2 {
-    font-size: 28px;
-    color: #efff10; /* Red for discounted price */
-}
-
-.original-price {
-    text-decoration: line-through;
-    font-size: 18px;
-    color: #888;
-    margin-left: 10px;
-}
-
-.btn {
-    background-color: #4976d6; /* Blue Button */
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.btn:hover {
-    background-color: #355ecf; /* Dark Blue on hover */
-    box-shadow: 0px 5px 15px rgba(73, 118, 214, 0.3);
-}
-
-/* Learn Section */
-.learn-section {
-    padding: 30px 40px;
-    background-color: #1a1f40;
-}
-
-.learn-section h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #ffffff;
-}
-/* Responsive Design */
-@media (max-width: 768px) {
-    .course-price {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 15px;
-        font-size: 18px;
-    }
-
-    .rating {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-}
-.content-item {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #0f1a2e;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.content-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.content-item h3 {
-    font-size: 20px;
-    color: white;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.content-item p {
-    font-size: 16px;
-    color: #d6c9c9;
-    margin-bottom: 15px;
-}
-
-.video-container {
-    margin-top: 15px;
-    display: none; /* Videos are hidden by default */
-}
-
-.video-container.hidden {
-    display: none;
-}
-
-.video-container.visible {
-    display: block;
-}
-
-</style>
-
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1f40;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        .course-module {
+            width: 100%;
+            margin: 0 auto;
+            background-color: #243a5e;
+        }
+        /* Course Header */
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #4976d6, #355ecf);
+            height: 350px;
+        }
+        .header-content {
+            max-width: 60%;
+            text-align: left;
+        }
+        .header-content h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .header-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .header-image img {
+            max-width: 300px;
+            border-radius: 10px;
+        }
+        /* Course Content */
+        .course-content {
+            padding: 30px 40px;
+            background-color: #1a1f40;
+        }
+        .course-content h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .content-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #0f1a2e;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .content-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .content-item h3 {
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+        .video-container {
+            display: none;
+            margin-top: 15px;
+        }
+        .video-container.visible {
+            display: block;
+        }
+        .btn {
+            background-color: #4976d6;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn:hover {
+            background-color: #355ecf;
+            box-shadow: 0px 5px 15px rgba(73, 118, 214, 0.3);
+        }
+    </style>
 </head>
 <body>
     <div class="course-module">
         <!-- Header Section -->
         <div class="course-header">
             <div class="header-content">
-                <h1>100 Days of Code: The Complete Python Pro Bootcamp</h1>
-                <p>Master Python by building 100 projects in 100 days. Learn data science, automation, web development, and more!</p>
-                <div class="rating">
-                    <span>Bestseller</span>
-                    <span>4.7 ⭐ (335,117 ratings)</span>
-                    <span>1,432,897 students</span>
-                </div>
+                <h1><%= course.title %></h1>
+                <p><%= course.description %></p>
             </div>
             <div class="header-image">
-                <img src="server tech img.webp" alt="Python Course Image">
+                <img src="server tech img.webp" alt="Course Image">
             </div>
-        </div>
-
-        <!-- Price & Enroll Section -->
-        <div class="course-price">
-            <div class="price">
-                <h2>₹399 <span class="original-price">₹3,299</span></h2>
-                <p>88% off | Offer ends in <strong>5 days</strong></p>
-            </div>
-            <button id="enroll-btn" class="btn">Enroll Now</button>
-        </div>
-
-        <!-- What You'll Learn Section -->
-        <div class="learn-section">
-            <h2>What you'll learn</h2>
-            <ul>
-                <li>✅ Master Python programming by building 100 unique projects.</li>
-                <li>✅ Learn web development, data science, and machine learning.</li>
-                <li>✅ Build games, websites, and automation tools.</li>
-                <li>✅ Master tools like Flask, Pandas, Selenium, and more.</li>
-            </ul>
         </div>
 
         <!-- Course Content Section -->
         <div class="course-content">
             <h2>Course Content</h2>
-            
-            <!-- Section 1 -->
-            <div class="content-item">
-                <h3 class="toggle-video">📽️ Section 1: Introduction to Python</h3>
-                <p>This section introduces you to Python and sets the foundation for the course.</p>
-                <div class="video-container hidden">
-                    <video controls width="100%">
-                        <source src="path-to-your-video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div>
-        
-            <!-- Section 2 -->
-            <div class="content-item">
-                <h3 class="toggle-video">📽️ Section 2: Python Basics</h3>
-                <p>Learn the basics of Python programming with hands-on examples.</p>
-                <div class="video-container hidden">
-                    <iframe 
-                        src="https://www.youtube.com/embed/exampleVideoId" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        width="100%" 
-                        height="300px">
-                    </iframe>
-                </div>
-            </div>
-        
-            <!-- Section 3 -->
-            <div class="content-item">
-                <h3 class="toggle-video">📽️ Section 3: Advanced Python Concepts</h3>
-                <p>This section covers advanced topics like object-oriented programming and more.</p>
-                <div class="video-container hidden">
-                    <iframe 
-                        src="https://player.vimeo.com/video/exampleVideoId" 
-                        frameborder="0" 
-                        allow="autoplay; fullscreen" 
-                        width="100%" 
-                        height="300px">
-                    </iframe>
-                </div>
-            </div>
+
+            <% if (course.videos.length > 0) { %>
+                <% course.videos.forEach(video => { %>
+                    <div class="content-item">
+                        <h3 class="toggle-video">📽️ <%= video.title %></h3>
+                        <div class="video-container">
+                            <video width="100%" controls>
+                                <source src="<%= video.videoUrl %>" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <br>
+                            <!-- Get Link Button -->
+                            <a href="<%= video.videoUrl %>" target="_blank">
+                                <button class="btn">Get Link</button>
+                            </a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No videos available for this course.</p>
+            <% } %>
         </div>
-        
     </div>
 
     <!-- JavaScript -->
     <script>
-        document.getElementById("enroll-btn").addEventListener("click", function () {
-    alert("You have enrolled in the course!");
-    window.location.href = "enrollmentPage.html"; // Replace with your enrollment page link
-});
-// Select all toggles
-document.querySelectorAll('.toggle-video').forEach((toggle) => {
-    toggle.addEventListener('click', function () {
-        // Find the nearest video container sibling
-        const videoContainer = this.nextElementSibling.nextElementSibling;
+        // Toggle Video Visibility
+        document.querySelectorAll('.toggle-video').forEach((toggle) => {
+            toggle.addEventListener('click', function () {
+                const videoContainer = this.nextElementSibling;
 
-        // Toggle visibility
-        if (videoContainer.classList.contains('hidden')) {
-            videoContainer.classList.remove('hidden');
-            videoContainer.classList.add('visible');
-        } else {
-            videoContainer.classList.add('hidden');
-            videoContainer.classList.remove('visible');
-        }
-    });
-});
-
+                if (videoContainer.classList.contains('visible')) {
+                    videoContainer.classList.remove('visible');
+                } else {
+                    videoContainer.classList.add('visible');
+                }
+            });
+        });
     </script>
 </body>
 </html>

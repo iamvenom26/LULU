@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <h2>Upload Course</h2>
+    <form action="/videos/upload" method="POST" enctype="multipart/form-data">
+        <label for="title">Course Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="authorName">Author Name:</label>
+        <input type="text" id="authorName" name="authorName" required>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="coverProfile">Cover Profile Image:</label>
+        <input type="file" id="coverProfile" name="coverProfile" accept="image/*">
+
+        <label for="videos">Upload Videos:</label>
+        <input type="file" id="videos" name="videos" accept="video/mp4,video/mkv,video/avi" multiple required>
+        <label for="category">Category:</label>
+        <select name="category" required>
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="Server Management">Server Management</option>
+        </select>
+        
+        <button type="submit">Upload</button>
+    </form>
+    
+    <a href="/videos/all">Back to All Videos</a>
+</body>
+</html>

@@ -20,20 +20,22 @@
                 <div class="logo">LULU Academy</div>
             </div>
             <div class="nav-right">
-                <% if (locals.user.role =="ADMIN") { %>
-                    <div class="nav-right">
-                        <a href="/" class="enroll-btn">ADD Course</a>
-                    </div>
-                
-               <% } else if (locals.user) { %>
-                <div class="nav-left">
-                    <a href="#" class="enroll-btn">Enroll Now</a>
-                </div>
-                    <% } else { %>
+                <% if (locals.user) { %>
+                    <% if (locals.user.role === "ADMIN") { %>
                         <div class="nav-left">
-                            <a href="/user/signin" class="enroll-btn">Login</a>
+                            <a href="/" class="enroll-btn">ADD Course</a>
                         </div>
-                     <% } %>
+                    <% } else { %>
+                        <div class="nav-right">
+                            <a href="#" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    <% } %>
+                <% } else { %>
+                    <div class="nav-left">
+                        <a href="/user/signin" class="enroll-btn">Login</a>
+                    </div>
+                <% } %>
+                
             </div>
         </div>
     </nav>
@@ -91,287 +93,53 @@
         </div>
     </div>
     <section id="courses" class="courses">
-    <div class="container">
-        <h2>Trending Courses</h2>
-        <div class="course-grid">
-            <!-- Row 1 -->
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/nodejs-complete.jpg" alt="Node.js Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">Complete Node.js Developer in 2024: Zero to Mastery</h3>
-                    <p class="instructor">David Wilson</p>
-                    <div class="rating">
-                        <span class="rating-score">4.8</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(15,521)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>32 hours</span> • <span>412 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹449</span>
-                        <span class="original-price">₹3,999</span>
-                    </div>
-                    <span class="bestseller-tag">Bestseller</span>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/python-django.jpg" alt="Django Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">Django 5.0 Masterclass: Build Real-World Projects</h3>
-                    <p class="instructor">Sarah Johnson</p>
-                    <div class="rating">
-                        <span class="rating-score">4.7</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(8,129)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>28.5 hours</span> • <span>325 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹499</span>
-                        <span class="original-price">₹3,999</span>
-                    </div>
-                    <span class="bestseller-tag">Bestseller</span>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/spring-boot.jpg" alt="Spring Boot Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">Spring Boot 3 & Spring Framework 6: Latest Version</h3>
-                    <p class="instructor">Michael Brown</p>
-                    <div class="rating">
-                        <span class="rating-score">4.9</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(12,331)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>45 hours</span> • <span>482 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹549</span>
-                        <span class="original-price">₹4,999</span>
-                    </div>
-                    <span class="hot-tag">Hot & New</span>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/fastapi.jpg" alt="FastAPI Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">FastAPI: Modern Python Web Development</h3>
-                    <p class="instructor">Emma Davis</p>
-                    <div class="rating">
-                        <span class="rating-score">4.8</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(5,892)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>22 hours</span> • <span>280 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹399</span>
-                        <span class="original-price">₹3,499</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Row 2 -->
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/microservices.jpg" alt="Microservices Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">Microservices Architecture: Practical Implementation</h3>
-                    <p class="instructor">Alex Turner</p>
-                    <div class="rating">
-                        <span class="rating-score">4.7</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(7,234)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>36 hours</span> • <span>420 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹649</span>
-                        <span class="original-price">₹4,999</span>
-                    </div>
-                    <span class="bestseller-tag">Bestseller</span>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/golang.jpg" alt="Golang Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">Go Programming: Building High-Performance APIs</h3>
-                    <p class="instructor">James Wilson</p>
-                    <div class="rating">
-                        <span class="rating-score">4.9</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(3,421)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>25 hours</span> • <span>310 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹499</span>
-                        <span class="original-price">₹3,999</span>
-                    </div>
-                    <span class="hot-tag">Hot & New</span>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/aws-backend.jpg" alt="AWS Backend Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">AWS for Backend Developers: Complete Guide</h3>
-                    <p class="instructor">Lisa Anderson</p>
-                    <div class="rating">
-                        <span class="rating-score">4.8</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(6,129)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>30 hours</span> • <span>380 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹749</span>
-                        <span class="original-price">₹5,999</span>
-                    </div>
-                    <span class="bestseller-tag">Bestseller</span>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/graphql-advanced.jpg" alt="GraphQL Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">Advanced GraphQL with Node.js and React</h3>
-                    <p class="instructor">Robert Clark</p>
-                    <div class="rating">
-                        <span class="rating-score">4.7</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(4,876)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>28 hours</span> • <span>340 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹599</span>
-                        <span class="original-price">₹4,999</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Row 3 -->
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/docker-kubernetes.jpg" alt="Docker & K8s Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">Docker & Kubernetes: The Complete DevOps Guide</h3>
-                    <p class="instructor">Chris Anderson</p>
-                    <div class="rating">
-                        <span class="rating-score">4.8</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(9,876)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>42 hours</span> • <span>445 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹699</span>
-                        <span class="original-price">₹4,999</span>
-                    </div>
-                    <span class="bestseller-tag">Bestseller</span>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/nestjs.jpg" alt="NestJS Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">NestJS: Enterprise Node.js Framework</h3>
-                    <p class="instructor">Sophie Martin</p>
-                    <div class="rating">
-                        <span class="rating-score">4.9</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(3,567)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>26 hours</span> • <span>320 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹549</span>
-                        <span class="original-price">₹3,999</span>
-                    </div>
-                    <span class="hot-tag">Hot & New</span>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/redis.jpg" alt="Redis Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">Redis: Beyond Caching - Advanced Concepts</h3>
-                    <p class="instructor">Daniel Lee</p>
-                    <div class="rating">
-                        <span class="rating-score">4.7</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(2,891)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>18 hours</span> • <span>220 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹399</span>
-                        <span class="original-price">₹2,999</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-image">
-                    <img src="images/system-design.jpg" alt="System Design Course">
-                </div>
-                <div class="course-content">
-                    <h3 class="course-title">System Design for Senior Backend Engineers</h3>
-                    <p class="instructor">Mark Thompson</p>
-                    <div class="rating">
-                        <span class="rating-score">4.9</span>
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(7,234)</span>
-                    </div>
-                    <div class="meta-info">
-                        <span>35 hours</span> • <span>380 lectures</span>
-                    </div>
-                    <div class="price-info">
-                        <span class="current-price">₹799</span>
-                        <span class="original-price">₹5,999</span>
-                    </div>
-                    <span class="bestseller-tag">Bestseller</span>
-                </div>
+        <div class="container">
+            <h2>Trending Frontend Courses</h2>
+            <div class="course-grid">
+                
+                <!-- Dynamic Courses from Database -->
+                <% if (courses && courses.length > 0) { %>
+                    <% courses.filter(course => course.category === "Backend").forEach(course => { %>
+                        <form action="/videos/<%= course._id %>" method="get">
+                            <button type="submit" style="all: unset; cursor: pointer; display: block; width: 100%;">
+                                <div class="course-card">
+                                    <div class="course-image">
+                                        <img src="<%= course.coverProfile %>" alt="<%= course.title %>">
+                                    </div>
+                                    <div class="course-content">
+                                        <h3 class="course-title"><%= course.title %></h3>
+                                        <p class="instructor"><%= course.authorName %></p>
+                
+                                        <div class="rating">
+                                            <span class="rating-score">4.9</span>
+                                            <span class="stars">★★★★★</span>
+                                            <span class="rating-count">(18,521)</span>
+                                        </div>
+                                        <div class="meta-info">
+                                            <span>38 hours</span> • <span>450 lectures</span>
+                                        </div>
+                                        <div class="price-info">
+                                            <span class="current-price">₹<%= course.price %></span>
+                                            <span class="original-price">₹3,999</span>
+                                        </div>
+                                        <span class="bestseller-tag">Bestseller</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    <% }); %>
+                <% } else { %>
+                    <p>No courses available</p>
+                <% } %>
+                
+    
+                <!-- Static React Course -->
+                
+    
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
     <!-- Simple Footer -->
     <footer class="footer">
         <div class="container">

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= course.title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1f40, #0f1a2e);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        .course-module {
+            width: 100%;
+            margin: 0 auto;
+        }
+        /* Course Header */
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #4976d6, #355ecf);
+            height: 350px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .header-content {
+            max-width: 60%;
+            text-align: left;
+        }
+        .header-content h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .header-content p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .header-image img {
+            max-width: 320px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        /* Course Content */
+        .course-content {
+            padding: 40px;
+        }
+        .course-content h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4976d6;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .content-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #0f1a2e;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .content-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(73, 118, 214, 0.2);
+        }
+        .content-item h3 {
+            font-size: 22px;
+            color: white;
+        }
+        .video-container {
+            display: none;
+            margin-top: 15px;
+        }
+        .video-container.visible {
+            display: block;
+        }
+        .btn {
+            background: linear-gradient(135deg, #4976d6, #355ecf);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border: none;
+            outline: none;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background: #355ecf;
+            box-shadow: 0px 5px 20px rgba(73, 118, 214, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="course-module">
+        <!-- Header Section -->
+        <div class="course-header">
+            <div class="header-content">
+                <h1><%= course.title %></h1>
+                <p><%= course.description %></p>
+            </div>
+            <div class="header-image">
+                <img src="<%= course.coverProfile %>" alt="Course Image">
+
+            </div>
+        </div>
+
+        <!-- Course Content Section -->
+        <div class="course-content">
+            <h2>Course Content</h2>
+
+            <% if (course.videos.length > 0) { %>
+                <% course.videos.forEach(video => { %>
+                    <div class="content-item">
+                        <h3 class="toggle-video">📽️ <%= video.title %></h3>
+                        <div class="video-container">
+                            <video width="100%" controls>
+                                <source src="<%= video.videoUrl %>" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <br>
+                            <a href="<%= video.videoUrl %>" target="_blank" class="btn">Get Link</a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No videos available for this course.</p>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.querySelectorAll('.toggle-video').forEach((toggle) => {
+            toggle.addEventListener('click', function () {
+                const videoContainer = this.nextElementSibling;
+                videoContainer.classList.toggle('visible');
+            });
+        });
+    </script>
+</body>
+</html>

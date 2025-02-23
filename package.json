@@ -2,6 +2,8 @@
   "name": "home",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "commonjs",
+ 
   "scripts": {
     "start": "nodemon app.js "
   },
