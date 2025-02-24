@@ -65,14 +65,25 @@
                 </div>
             </div>
             <div class="nav-right">
-                <a href="/aboutUs" class="teach-link">About Us</a>
-                <% if (locals.user) { %>
-                <% }else { %>
+                <% if (locals.user && locals.user.role) { %>
+                    <% if (locals.user.role === "ADMIN") { %>
+                        
+                        <form action="/videos/upload" method="get"  >
+                            <button class="login-btn">ADD Course</button> 
+                        </form>
+                    <% } else { %>
+                        <div class="nav-right">
+                            <a href="/aboutUs" class="enroll-btn">About Us</a>
+                        </div>
+                    <% } %>
+                <% } else { %>
                     <form action="/user/signin" method="get"  >
-                <button class="login-btn">Login</button> 
-            </form>
+                        <button class="login-btn">Login</button> 
+                    </form>
                 <% } %>
+    
             </div>
+         
         </header>
         <!-- Hero Section -->
    <!-- Hero Section -->

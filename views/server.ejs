@@ -23,20 +23,15 @@
             </div>
             <div class="nav-right">
                 <% if (locals.user) { %>
-                    <% if (locals.user.role === "ADMIN") { %>
-                        <div class="nav-left">
-                            <a href="/" class="enroll-btn">ADD Course</a>
-                        </div>
+                    <div class="nav-right">
+                        <a href="#" class="enroll-btn">Enroll Now</a>
+                    </div>
                     <% } else { %>
-                        <div class="nav-right">
-                            <a href="#" class="enroll-btn">Enroll Now</a>
+                        <div class="nav-left">
+                            <a href="/user/signin" class="enroll-btn">Login</a>
                         </div>
                     <% } %>
-                <% } else { %>
-                    <div class="nav-left">
-                        <a href="/user/signin" class="enroll-btn">Login</a>
-                    </div>
-                <% } %>
+               
                 
             </div>
         </div>

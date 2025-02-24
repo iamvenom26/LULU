@@ -481,21 +481,15 @@ body {
                 </a>
                 <div class="logo">LULU Academy</div>
             </div>
-            <% if (locals.user && locals.user.role) { %>
-                <% if (locals.user.role === "ADMIN") { %>
-                    <div class="nav-left">
-                        <a href="/videos/upload" class="enroll-btn">ADD Course</a>
-                    </div>
+            <% if (locals.user) { %>
+                <div class="nav-right">
+                    <a href="#" class="enroll-btn">Enroll Now</a>
+                </div>
                 <% } else { %>
-                    <div class="nav-right">
-                        <a href="#" class="enroll-btn">Enroll Now</a>
+                    <div class="nav-left">
+                        <a href="/user/signin" class="enroll-btn">Login</a>
                     </div>
                 <% } %>
-            <% } else { %>
-                <div class="nav-left">
-                    <a href="/user/signin" class="enroll-btn">Login</a>
-                </div>
-            <% } %>
             
             
         </div>
