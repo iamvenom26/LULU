@@ -3,7 +3,9 @@ const videoController = require("../controllers/videoController");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
+const Course = require("../model/courses");
 
+const { isAdmin } = require("../middleware/auth"); // Middleware for admin access
 const router = express.Router();
 
 // 🔹 Multer Storage Configuration (Videos & Cover Profile)
@@ -41,20 +43,27 @@ const upload = multer({
   limits: { fileSize: 500 * 1024 * 1024 }, // 500MB limit
 });
 
-// 🔹 Video Routes
-router.get("/all", videoController.getAllCourses); // Fetch all videos
-router.get("/upload", videoController.renderUploadPage); // Render upload page
+router.get("/all",isAdmin, videoController.getAllCourses);
+
+
+router.get("/upload", isAdmin, videoController.renderUploadPage);
+
 router.post(
   "/upload",
+  isAdmin,
   upload.fields([
     { name: "coverProfile", maxCount: 1 },
     { name: "videos", maxCount: 5 },
   ]),
   videoController.uploadVideos
 );
-router.get("/watch/:id", videoController.watchVideo); // Watch a video
-router.get("/:id", videoController.getVideoById); // Get video by ID
-router.post("/edit/:id", videoController.editVideo); // Edit video details
-router.post("/delete/:id", videoController.deleteVideo); // Delete video
+
+router.get("/watch/:id", videoController.watchVideo);
+router.get("/:id", videoController.getVideoById);
+
+router.get("/edit/:id", isAdmin, videoController.renderEditPage);
+router.post("/edit/:id", isAdmin, videoController.editCourse);
+
+router.post("/delete/:id", isAdmin, videoController.deleteCourse);
 
 module.exports = router;

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Course</title>
+    <link rel="stylesheet" href="/styles.css"> 
+</head>
+<body>
+    <h1>Edit Course</h1>
+    <form action="/videos/edit/<%= course._id %>" method="POST">
+        <label>Title:</label>
+        <input type="text" name="title" value="<%= course.title %>" required />
+      
+        <label>Author Name:</label>
+        <input type="text" name="authorName" value="<%= course.authorName %>" required />
+      
+        <label>Price:</label>
+        <input type="number" name="price" value="<%= course.price %>" required />
+      
+        <label>Description:</label>
+        <textarea name="description" required><%= course.description %></textarea>
+      
+        <button type="submit">Update Course</button>
+      </form>
+      
+    <a href="/videos/all">Back to Courses</a>
+</body>
+</html>

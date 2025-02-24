@@ -1,0 +1,12 @@
+const express = require("express");
+const router = express.Router();
+const adminController = require("../controllers/adminController");
+const { isAdmin } = require("../middleware/auth");
+
+// ✅ Get All Reports (Admin Only)
+router.get("/reports", isAdmin, adminController.getReports);
+
+// ✅ Delete Report (Admin Only)
+router.post("/reports/delete/:id", isAdmin, adminController.deleteReport);
+
+module.exports = router;

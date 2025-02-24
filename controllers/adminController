@@ -1,0 +1,23 @@
+const Report = require("../model/report");
+
+// ✅ Fetch All Reports (For Admin)
+exports.getReports = async (req, res) => {
+  try {
+    const reports = await Report.find().sort({ createdAt: -1 }); // Latest first
+    res.render("reports", { reports });
+  } catch (error) {
+    console.error("Error fetching reports:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+// ✅ Delete Report (For Admin)
+exports.deleteReport = async (req, res) => {
+  try {
+    await Report.findByIdAndDelete(req.params.id);
+    res.redirect("/admin/reports");
+  } catch (error) {
+    console.error("Error deleting report:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};

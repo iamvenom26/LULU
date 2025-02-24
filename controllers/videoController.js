@@ -1,32 +1,20 @@
 const Course = require("../model/courses");
-const Video = require("../model/video"); // Ensure Video model is imported
+const Video = require("../model/video");
 const path = require("path");
 const fs = require("fs");
-
-// 🔹 Get all Courses (with Videos)
-exports.getAllCourses = async (req, res) => {
-  try {
-    const courses = await Course.find().populate("videos");
-
-    res.render("frontend", { courses: courses || [] }); // Ensure no null errors
-  } catch (error) {
-    console.error("Error fetching courses:", error);
-    res.status(500).send("Error fetching courses");
-  }
-};
 
 // 🔹 Get a single video by ID
 exports.getVideoById = async (req, res) => {
   try {
     const course = await Course.findById(req.params.id).populate("videos");
     if (!course) {
-        return res.status(404).send("Course not found");
+      return res.status(404).json({ error: "Course not found" });
     }
     res.render("courseDetail", { course });
-} catch (error) {
+  } catch (error) {
     console.error("Error fetching course details:", error);
-    res.status(500).send("Internal Server Error");
-}
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 // 🔹 Render upload page
@@ -41,16 +29,20 @@ exports.watchVideo = async (req, res) => {
     const video = await Video.findById(videoId);
 
     if (!video) {
-      return res.status(404).send("Video not found");
+      return res.status(404).json({ error: "Video not found" });
     }
 
-    // Construct full video file path
-    const videoPath = path.join(__dirname, "..", "public", "uploads", "videos", path.basename(video.videoUrl));
-    console.log("Trying to access video file at:", videoPath);
+    const videoPath = path.join(
+      __dirname,
+      "..",
+      "public",
+      "uploads",
+      "videos",
+      path.basename(video.videoUrl)
+    );
 
-    // Check if file exists
     if (!fs.existsSync(videoPath)) {
-      return res.status(404).send("Video file not found");
+      return res.status(404).json({ error: "Video file not found" });
     }
 
     const stat = fs.statSync(videoPath);
@@ -58,50 +50,47 @@ exports.watchVideo = async (req, res) => {
     const range = req.headers.range;
 
     if (!range) {
-      return res.status(400).send("Request range header missing");
+      res.writeHead(200, {
+        "Content-Length": fileSize,
+        "Content-Type": "video/mp4",
+      });
+      return fs.createReadStream(videoPath).pipe(res);
     }
 
-    // Parse range header
     const CHUNK_SIZE = 10 ** 6; // 1MB per chunk
     const start = Number(range.replace(/\D/g, ""));
     const end = Math.min(start + CHUNK_SIZE, fileSize - 1);
     const contentLength = end - start + 1;
 
-    // Set streaming headers
     res.writeHead(206, {
       "Content-Range": `bytes ${start}-${end}/${fileSize}`,
       "Accept-Ranges": "bytes",
       "Content-Length": contentLength,
       "Content-Type": "video/mp4",
-      "Content-Disposition": "inline", // Prevent downloads
-      "X-Content-Type-Options": "nosniff", // Prevent MIME-type sniffing
-      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
-      "Pragma": "no-cache",
     });
 
-    // Stream the video chunk
-    const videoStream = fs.createReadStream(videoPath, { start, end });
-    videoStream.pipe(res);
+    fs.createReadStream(videoPath, { start, end }).pipe(res);
   } catch (error) {
     console.error("Error streaming video:", error);
-    res.status(500).send("Error watching video");
+    res.status(500).json({ error: "Error watching video" });
   }
 };
+
 // 🔹 Upload multiple videos & Create Course
 exports.uploadVideos = async (req, res) => {
   try {
     const { title, authorName, price, description, category } = req.body;
 
     if (!title || !authorName || !price || !description || !category) {
-      return res.status(400).send("All fields, including category, are required.");
+      return res.status(400).json({ error: "All fields are required." });
     }
 
     if (!["Frontend", "Backend", "Server Management"].includes(category)) {
-      return res.status(400).send("Invalid category.");
+      return res.status(400).json({ error: "Invalid category." });
     }
 
     if (!req.files || (!req.files.videos && !req.files.coverProfile)) {
-      return res.status(400).send("No files uploaded. Please upload a video or cover image.");
+      return res.status(400).json({ error: "No files uploaded." });
     }
 
     let coverProfilePath = "";
@@ -123,70 +112,88 @@ exports.uploadVideos = async (req, res) => {
       authorName,
       price,
       description,
-      category, // 🔹 Store category in DB
+      category,
       coverProfile: coverProfilePath,
       videos: videoDocs,
     });
 
     await newCourse.save();
-
-    res.redirect("/videos/all");
+    res.status(201).json({ message: "Course created successfully", course: newCourse });
   } catch (error) {
     console.error("Error uploading videos:", error);
-    res.status(500).send("Error uploading videos");
+    res.status(500).json({ error: "Error uploading videos" });
+  }
+};
+
+// 🔹 Render Edit Page
+exports.renderEditPage = async (req, res) => {
+  try {
+    const courseId = req.params.id;
+    const course = await Course.findById(courseId);
+
+    if (!course) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+
+    res.render("editCourse", { course });
+  } catch (error) {
+    console.error("Error fetching course:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 // 🔹 Edit Course Details
-exports.editVideo = async (req, res) => {
+exports.editCourse = async (req, res) => {
   try {
-    const { title, authorName, price, description } = req.body;
     const courseId = req.params.id;
+    const { title, authorName, price, description, category } = req.body;
 
-    if (!title || !authorName || !price || !description) {
-      return res.status(400).send("All fields are required.");
+    const course = await Course.findByIdAndUpdate(courseId, { title, authorName, price, description, category }, { new: true });
+
+    if (!course) {
+      return res.status(404).json({ error: "Course not found" });
     }
 
-    const updatedCourse = await Course.findByIdAndUpdate(
-      courseId,
-      { title, authorName, price, description },
-      { new: true }
-    );
-
-    if (!updatedCourse) {
-      return res.status(404).send("Course not found");
-    }
-
-    res.redirect(`/videos/all`);
+    res.status(200).json({ message: "Course updated successfully", course });
   } catch (error) {
     console.error("Error updating course:", error);
-    res.status(500).send("Error updating course");
+    res.status(500).json({ error: "Error updating course" });
   }
 };
 
-// 🔹 Delete Video & Course
-exports.deleteVideo = async (req, res) => {
+// 🔹 Delete Course & Videos
+exports.deleteCourse = async (req, res) => {
   try {
     const courseId = req.params.id;
     const course = await Course.findById(courseId).populate("videos");
 
     if (!course) {
-      return res.status(404).send("Course not found");
+      return res.status(404).json({ error: "Course not found" });
     }
 
     for (const video of course.videos) {
       const videoPath = path.join(__dirname, "..", "public", "uploads", "videos", path.basename(video.videoUrl));
+
       if (fs.existsSync(videoPath)) {
         fs.unlinkSync(videoPath);
       }
+
       await Video.findByIdAndDelete(video._id);
     }
 
     await Course.findByIdAndDelete(courseId);
-
-    res.redirect("/videos/all");
+    res.status(200).json({ message: "Course deleted successfully" });
   } catch (error) {
     console.error("Error deleting course:", error);
-    res.status(500).send("Error deleting course");
+    res.status(500).json({ error: "Error deleting course" });
+  }
+};
+exports.getAllCourses = async (req, res) => {
+  try {
+    const courses = await Course.find();
+    res.render("courseList", { courses });
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+    res.status(500).send("Internal Server Error");
   }
 };

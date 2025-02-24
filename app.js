@@ -7,6 +7,8 @@ const reportRoutes = require('./routes/report');
 const videoRoutes = require("./routes/videoRoutes");
 const { checkForAthenticationCookie } = require('./middleware/authetication');
 const fs = require('fs');
+const adminRoutes = require("./routes/adminRoutes");
+
 
 // Create upload directories if they don't exist
 const uploadDir = path.join(__dirname, 'public', 'uploads');
@@ -40,7 +42,7 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null; // Ensure `user` is available in all views
   next();
 });
-
+app.use("/admin", adminRoutes);
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));
 
