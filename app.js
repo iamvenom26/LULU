@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express= require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -22,12 +23,12 @@ if (!fs.existsSync(profilesDir)) {
 }
 
 const app = express();
-const PORT = 186;
+const PORT = process.env.PORT || 186;
 
 
 // MongoDB
 mongoose
-  .connect('mongodb://localhost:27017/plulu')
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB Connected'))
   .catch((err) => console.error('MongoDB Connection Error:', err));
 
