@@ -5,21 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frontend Development Academy | LULU Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <%- include('./css/frontend') %>
-    <style>
+    <style> 
         :root {
-    --primary-color: #4834d4;    /* Purple shade for frontend theme */
-    --secondary-color: #686de0;   /* Light purple */
-    --accent-color: #00b894;      /* Mint green */
-    --background-color: #f7f7f7;  /* Light background */
-    --card-bg: #ffffff;           /* White cards */
-    --text-color: #2d3436;        /* Dark text */
-    --text-secondary: #636e72;    /* Grey text */
-    --success-color: #00b894;     /* Green */
-    --warning-color: #fdcb6e;     /* Yellow */
-    --error-color: #ff7675;       /* Red */
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #27ae60;
+    --background-color: #1a1a2e;
+    --card-bg: #1f2937;
+    --text-color: #ffffff;
+    --text-secondary: #e0e0e0;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
+    --error-color: #e74c3c;
     --border-radius: 10px;
-    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
 
@@ -49,11 +47,11 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(26, 26, 46, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 1rem 0;
-    box-shadow: var(--box-shadow);
+    border-bottom: 1px solid rgba(39, 174, 96, 0.1);
 }
 
 .nav-container {
@@ -72,8 +70,7 @@ body {
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-color);
-    text-decoration: none;
+    color: var(--accent-color);
 }
 
 .back-home {
@@ -87,40 +84,42 @@ body {
 }
 
 .back-home:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 .enroll-btn {
     padding: 0.5rem 1.5rem;
-    background: var(--primary-color);
-    color: white;
+    background: var(--accent-color);
+    color: var(--text-color);
     border-radius: 25px;
     text-decoration: none;
     transition: var(--transition);
-    font-weight: 500;
 }
 
 .enroll-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(72, 52, 212, 0.3);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
 }
 
 /* Hero Section */
 .hero {
     padding: 8rem 2rem 4rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
     text-align: center;
+    position: relative;
 }
 
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(39, 174, 96, 0.2);
+    color: var(--accent-color);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     margin-bottom: 1rem;
@@ -135,7 +134,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.2rem;
-    opacity: 0.9;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
 }
 
@@ -155,7 +154,7 @@ body {
 
 .stat-item i {
     font-size: 2rem;
-    opacity: 0.9;
+    color: var(--accent-color);
 }
 
 .stat-info {
@@ -165,18 +164,17 @@ body {
 .stat-number {
     font-size: 1.5rem;
     font-weight: 700;
+    color: var(--text-color);
 }
 
 .stat-label {
     font-size: 0.9rem;
-    opacity: 0.9;
+    color: var(--text-secondary);
 }
-
 /* Advertisement Banner */
 .ad-banner {
-    background: linear-gradient(45deg, #00b894, #00cec9);
+    background: linear-gradient(45deg, #2c3e50, #3498db);
     padding: 1.5rem 0;
-    color: white;
 }
 
 .ad-content {
@@ -184,7 +182,8 @@ body {
 }
 
 .ad-badge {
-    background: rgba(255, 255, 255, 0.2);
+    background: #e74c3c;
+    color: white;
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
     font-size: 0.9rem;
@@ -193,15 +192,14 @@ body {
 }
 
 .countdown {
-    color: var(--warning-color);
+    color: #ffd700;
     font-weight: bold;
 }
 
 /* Course Categories */
 .course-categories {
     padding: 1rem 0;
-    background: white;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .category-btn {
@@ -217,8 +215,8 @@ body {
 
 .category-btn.active,
 .category-btn:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
+    background: var(--accent-color);
+    border-color: var(--accent-color);
     color: white;
 }
 
@@ -230,7 +228,6 @@ body {
 .courses h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: var(--text-color);
 }
 
 .course-grid {
@@ -241,15 +238,15 @@ body {
 
 .course-card {
     background: var(--card-bg);
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     overflow: hidden;
     transition: var(--transition);
-    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .course-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .course-image {
@@ -264,20 +261,19 @@ body {
 }
 
 .course-content {
-    padding: 1.2rem;
+    padding: 1rem;
 }
 
-.course-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;  /* Add standard property */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    height: 2.8em;
+/* Fallback ellipsis for older browsers */
+@supports not (-webkit-line-clamp: 2) {
+    .course-title::after {
+        content: '...';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background: var(--card-bg);
+        padding-left: 4px;
+    }
 }
 
 .instructor {
@@ -317,13 +313,11 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 0.5rem;
 }
 
 .current-price {
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--text-color);
 }
 
 .original-price {
@@ -343,19 +337,19 @@ body {
 }
 
 .bestseller-tag {
-    background: var(--warning-color);
-    color: #000000;
+    background: #ffd700;
+    color: #000;
 }
 
 .hot-tag {
-    background: var(--error-color);
+    background: #e74c3c;
     color: white;
 }
 
 /* Featured Topics */
 .featured-topics {
     padding: 3rem 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .topics-grid {
@@ -368,28 +362,26 @@ body {
 .topic-card {
     background: var(--card-bg);
     padding: 2rem;
-    border-radius: var(--border-radius);
+    border-radius: 8px;
     text-align: center;
     transition: var(--transition);
-    box-shadow: var(--box-shadow);
 }
 
 .topic-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
 .topic-card i {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-bottom: 1rem;
 }
 
 /* Footer */
 .footer {
-    background: white;
+    background: var(--card-bg);
     padding: 2rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
 }
 
 .footer-content {
@@ -410,7 +402,7 @@ body {
 }
 
 .footer-links a:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 /* Responsive Design */
