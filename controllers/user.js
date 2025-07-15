@@ -3,7 +3,20 @@ const Course = require("../model/courses");
 exports.renderSignInPage = (req, res) => {
   res.render('login');
 };
+////////////////////////////////////
+exports.renderWatchHistory = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).populate('watchHistory.video').exec();
+    const watchHistory = Array.isArray(user.watchHistory) ? user.watchHistory : [];
+    res.render("history", { watchHistory, user });
+  } catch (error) {
+    console.error("Error fetching watch history:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 
+
+//////////////////////////////////////////////
 exports.handleSignIn = async (req, res) => {
   const { email, password } = req.body;
   try {
