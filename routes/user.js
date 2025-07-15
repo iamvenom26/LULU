@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const userController = require('../controllers/user');
+const { renderWatchHistory}= require('../controllers/videoController');
 const multer = require('multer');
 const path = require('path');
 const router = Router();
@@ -25,6 +26,7 @@ const upload = multer({
         }
     }
 });
+router.get('/history', userController.renderWatchHistory);
 
 router.get('/signin', userController.renderSignInPage);
 router.post('/signin', userController.handleSignIn);
