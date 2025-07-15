@@ -1,167 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= course.title %></title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1f40, #0f1a2e);
-            color: #ffffff;
-            line-height: 1.6;
-        }
-        .course-module {
-            width: 100%;
-            margin: 0 auto;
-        }
-        /* Course Header */
-        .course-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #4976d6, #355ecf);
-            height: 350px;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        .header-content {
-            max-width: 60%;
-            text-align: left;
-        }
-        .header-content h1 {
-            font-size: 40px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-        .header-content p {
-            font-size: 18px;
-            opacity: 0.9;
-        }
-        .header-image img {
-            max-width: 320px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        /* Course Content */
-        .course-content {
-            padding: 40px;
-        }
-        .course-content h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #4976d6;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-        .content-item {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #0f1a2e;
-            border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        .content-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(73, 118, 214, 0.2);
-        }
-        .content-item h3 {
-            font-size: 22px;
-            color: white;
-        }
-        .video-container {
-            display: none;
-            margin-top: 15px;
-        }
-        .video-container.visible {
-            display: block;
-        }
-        .btn {
-            background: linear-gradient(135deg, #4976d6, #355ecf);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            border: none;
-            outline: none;
-            display: inline-block;
-            text-decoration: none;
-        }
-        .btn:hover {
-            background: #355ecf;
-            box-shadow: 0px 5px 20px rgba(73, 118, 214, 0.4);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= course.title %> - Course Details</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome for play icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a1f40, #0f1a2e);
+      color: #ffffff;
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+    
+    /* Course Module */
+    .course-module {
+      max-width: 1200px;
+      margin: 80px auto 40px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      overflow: hidden;
+      color: #333;
+    }
+    /* Course Header */
+    .course-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 40px;
+      background: linear-gradient(135deg, #4976d6, #355ecf);
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 25, 47, 0.6);
+      z-index: 1;
+    }
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 60%;
+      text-align: left;
+      color: #fff;
+    }
+    .header-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .header-content p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    .header-image {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+      margin-left: auto; /* Ensures the image is pushed to the right */
+    }
+    .header-image img {
+      max-width: 320px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    /* Course Content Section */
+    .course-content {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+    .course-content h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #355ecf;
+      border-bottom: 2px solid #4976d6;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    /* Video Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 992px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .video-card {
+      background: #f7f9fc;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+    .thumbnail {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    .thumbnail img {
+      width: 100%;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+      display: block;
+    }
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 12px;
+      border-radius: 50%;
+    }
+    .play-overlay i {
+      color: #fff;
+      font-size: 24px;
+    }
+    .video-info {
+      padding: 10px;
+      text-align: left;
+    }
+    .video-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .video-info p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0;
+    }
+    /* Course Description Section */
+    .course-description {
+      margin-top: 40px;
+      padding: 20px;
+      background: #f7f9fc;
+      color: #333;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .course-description h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #355ecf;
+    }
+    .course-description p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    /* Footer */
+    .footer {
+      background: #0f1a2e;
+      padding: 2rem;
+      text-align: center;
+      color: #fff;
+      margin-top: 40px;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+    .footer-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .footer-section a {
+      color: #ffffff;
+      font-size: 0.9rem;
+      margin: 5px 0;
+      display: block;
+    }
+    .footer-bottom {
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+    /* Scroll to Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4976d6;
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      z-index: 1000;
+    }
+    .scroll-top:hover {
+      background: #355ecf;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-    <div class="course-module">
-        <!-- Header Section -->
-        <div class="course-header">
-            <div class="header-content">
-                <h1><%= course.title %></h1>
-                <p><%= course.description %></p>
-            </div>
-            <div class="header-image">
-                <img src="<%= course.coverProfile %>" alt="Course Image">
-
-            </div>
-        </div>
-
-        <!-- Course Content Section -->
-        <div class="course-content">
-            <h2>Course Content</h2>
-
-            <% if (course.videos.length > 0) { %>
-                <% course.videos.forEach(video => { %>
-                    <div class="content-item">
-                        <h3 class="toggle-video">📽️ <%= video.title %></h3>
-                        <div class="video-container">
-                            <video width="100%" controls>
-                                <source src="<%= video.videoUrl %>" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <br>
-                            <a href="<%= video.videoUrl %>" target="_blank" class="btn">Get Link</a>
-                        </div>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <p>No videos available for this course.</p>
-            <% } %>
-        </div>
+  
+  
+  
+  <div class="course-module">
+    <!-- Header Section -->
+    <div class="course-header">
+      <div class="header-overlay"></div>
+      <div class="header-content">
+        <h1><%= course.title %></h1>
+        Created By:<h3><%= course.authorName %></h3>
+      </div>
+      <div class="header-image">
+        <img src="<%= course.coverProfile %>" alt="Course Image">
+      </div>
     </div>
 
-    <!-- JavaScript -->
-    <script>
-        document.querySelectorAll('.toggle-video').forEach((toggle) => {
-            toggle.addEventListener('click', function () {
-                const videoContainer = this.nextElementSibling;
-                videoContainer.classList.toggle('visible');
-            });
-        });
-    </script>
+       <% if (locals.user) { %>
+        <div class="course-content">
+          <h2>Course Content</h2>
+          <% if (course.videos && course.videos.length > 0) { %>
+            <div class="video-grid">
+              <% course.videos.forEach(video => { %>
+                <a href="/videos/watch/<%= video._id %>" class="video-link" target="_blank">
+                  <div class="video-card">
+                    <div class="thumbnail">
+                      <img src="<%= video.coverProfile ? (video.coverProfile.startsWith('/') ? video.coverProfile : '/uploads/covers/' + video.coverProfile) : '/uploads/videos/default-thumbnail.jpg' %>" alt="<%= video.title %>">
+                      <div class="play-overlay">
+                        <i class="fas fa-play"></i>
+                      </div>
+                    </div>
+                    <div class="video-info">
+                      <h3><%= video.title %></h3>
+                      <% if (video.createdAt) { %>
+                        <p>Uploaded: <%= new Date(video.createdAt).toLocaleString() %></p>
+                      <% } %>
+                    </div>
+                  </div>
+                </a>
+              <% }); %>
+            </div>
+          <% } else { %>
+            <p>No videos available for this course.</p>
+          <% } %>    
+      
+      <% } else { %>
+        <div class="course-content">
+          <h2>Course Content</h2>
+          <% if (course.videos && course.videos.length > 0) { %>
+            <div class="video-grid">
+              <% course.videos.forEach(video => { %>
+                <a href="/user/signin" class="video-link" target="_blank">
+                  <div class="video-card">
+                    <div class="thumbnail">
+                      <img src="<%= video.coverProfile ? (video.coverProfile.startsWith('/') ? video.coverProfile : '/uploads/covers/' + video.coverProfile) : '/uploads/videos/default-thumbnail.jpg' %>" alt="<%= video.title %>">
+                      <div class="play-overlay">
+                        <i class="fas fa-play"></i>
+                      </div>
+                    </div>
+                    <div class="video-info">
+                      <h3><%= video.title %></h3>
+                      <% if (video.createdAt) { %>
+                        <p>Uploaded: <%= new Date(video.createdAt).toLocaleString() %></p>
+                      <% } %>
+                    </div>
+                  </div>
+                </a>
+              <% }); %>
+            </div>
+          <% } else { %>
+            <p>No videos available for this course.</p>
+          <% } %>   
+        <% } %>
+      <!-- Course Description Section -->
+      <div class="course-description">
+        <h2>Description</h2>
+        <p><%= course.description %></p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About LULU</h3>
+        <p>Empowering learners worldwide with professional courses.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="/aboutUs">About Us</a>
+        <a href="#">Courses</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 LULU Academy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 </body>
 </html>
