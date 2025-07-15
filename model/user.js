@@ -32,6 +32,12 @@ const UserSchema = new Schema(
       enum: ['USER', 'ADMIN'],
       default: 'USER',
     },
+    watchHistory: [
+      {
+        video: { type: Schema.Types.ObjectId, ref: 'Video' },
+        watchedAt: { type: Date, default: Date.now }
+      }
+    ],
   },
   { timestamps: true }
 );
