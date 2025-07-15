@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Watch History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a192f, #1e3a8a);
+      color: #fff;
+      padding: 30px;
+      margin: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+    /* Back to Home Button */
+    .back-home-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background: #4976d6;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .back-home-btn:hover {
+      background: #355ecf;
+      transform: scale(1.05);
+    }
+    /* History Grid Layout */
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 992px) {
+      .history-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .history-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* History Card Styling */
+    .history-card {
+      background: #f7f9fc;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .history-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+    .history-card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #333;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .card-content p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .watch-btn {
+      display: inline-block;
+      background: #4976d6;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .watch-btn:hover {
+      background: #355ecf;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-home-btn"><i class="fas fa-home"></i> Back to Home</a>
+    <h1>My Watch History</h1>
+    <% if (Array.isArray(watchHistory) && watchHistory.length > 0) { %>
+      <div class="history-grid">
+        <% watchHistory.forEach(entry => { %>
+          <div class="history-card">
+            <img src="<%= entry.video.coverProfile ? (entry.video.coverProfile.startsWith('/') ? entry.video.coverProfile : '/uploads/covers/' + entry.video.coverProfile) : '/uploads/videos/default-thumbnail.jpg' %>" alt="<%= entry.video.title %>">
+            <div class="card-content">
+              <h2><%= entry.video.title %></h2>
+              <p>Watched at: <%= new Date(entry.watchedAt).toLocaleString() %></p>
+              <a href="/videos/watch/<%= entry.video._id %>" class="watch-btn">Watch Again</a>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p>You haven't watched any videos yet.</p>
+    <% } %>
+  </div>
+</body>
+</html>
