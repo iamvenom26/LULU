@@ -1,3 +1,5 @@
+// Cloudinary config
+const cloudinary = require('./service/cloudinary');
 require('dotenv').config();
 const express= require('express');
 const mongoose = require('mongoose');
@@ -34,11 +36,14 @@ mongoose
 
 
   // Middleware
-app.use(express.json());
+app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(checkForAthenticationCookie('token'));
+
+
+
 app.use("/videos", videoRoutes); // Register video routes
 app.use((req, res, next) => {
   res.locals.user = req.user || null; // Ensure `user` is available in all views
