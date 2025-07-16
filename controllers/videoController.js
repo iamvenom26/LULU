@@ -3,6 +3,7 @@ const Video = require("../model/video");
 const User = require("../model/user"); 
 const path = require("path");
 const fs = require("fs");
+const cloudinary = require("../service/cloudinary");
 
 /////////////////////////////////////////////////
 exports.getVideoById = async (req, res) => {
@@ -50,6 +51,11 @@ exports.watchVideo = async (req, res) => {
       await user.save();
     }
     
+    // If videoUrl is a Cloudinary URL, redirect to it
+    if (video.videoUrl && video.videoUrl.startsWith('http')) {
+      return res.redirect(video.videoUrl);
+    }
+    // Otherwise, try to serve from local file system (for legacy videos)
     const videoPath = path.join(
       __dirname,
       "..",
@@ -58,15 +64,12 @@ exports.watchVideo = async (req, res) => {
       "videos",
       path.basename(video.videoUrl)
     );
-    
     if (!fs.existsSync(videoPath)) {
       return res.status(404).json({ error: "Video file not found" });
     }
-    
     const stat = fs.statSync(videoPath);
     const fileSize = stat.size;
     const range = req.headers.range;
-    
     if (!range) {
       res.writeHead(200, {
         "Content-Length": fileSize,
@@ -74,19 +77,16 @@ exports.watchVideo = async (req, res) => {
       });
       return fs.createReadStream(videoPath).pipe(res);
     }
-    
     const CHUNK_SIZE = 10 ** 6; // 1MB per chunk
     const start = Number(range.replace(/\D/g, ""));
     const end = Math.min(start + CHUNK_SIZE, fileSize - 1);
     const contentLength = end - start + 1;
-    
     res.writeHead(206, {
       "Content-Range": `bytes ${start}-${end}/${fileSize}`,
       "Accept-Ranges": "bytes",
       "Content-Length": contentLength,
       "Content-Type": "video/mp4",
     });
-    
     fs.createReadStream(videoPath, { start, end }).pipe(res);
   } catch (error) {
     console.error("Error streaming video:", error);
@@ -112,13 +112,22 @@ exports.uploadVideos = async (req, res) => {
 
     let coverProfilePath = "";
     if (req.files.coverProfile) {
-      coverProfilePath = "/uploads/covers/" + req.files.coverProfile[0].filename;
+      // Upload cover image to Cloudinary
+      const result = await cloudinary.uploader.upload(req.files.coverProfile[0].path, {
+        folder: "covers"
+      });
+      coverProfilePath = result.secure_url;
     }
 
     const videoDocs = [];
     if (req.files.videos) {
       for (const file of req.files.videos) {
-        const video = new Video({ title, videoUrl: "/uploads/videos/" + file.filename });
+        // Upload video to Cloudinary
+        const result = await cloudinary.uploader.upload(file.path, {
+          resource_type: "video",
+          folder: "videos"
+        });
+        const video = new Video({ title, videoUrl: result.secure_url });
         await video.save();
         videoDocs.push(video._id);
       }
